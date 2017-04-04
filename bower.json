@@ -1,0 +1,17 @@
+{
+  "name": "SmartyIndex",
+  "authors": [""],
+  "description": "",
+  "main": "",
+  "license": "",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

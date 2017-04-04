@@ -1,0 +1,19 @@
+.sec1{
+    background: #8f37fd;
+    background: -webkit-linear-gradient(left, #9238fc , #c655ef);
+    background: -o-linear-gradient(right, #9238fc, #c655ef);
+    background: -moz-linear-gradient(right, #9238fc, #c655ef);
+    background: linear-gradient(to right, #9238fc , #c655ef);
+    min-height: 720px;
+    min-height: 100vh;
+    color: #fff;
+}
+.graph1{
+    background: url(../images/index_bg.png);
+    background-size: cover;
+    background-position: center 0;
+    height: 160px;
+    width: 100%;
+    margin-top: -160px;
+    z-index: 5;
+}
