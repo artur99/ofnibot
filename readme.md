@@ -1,6 +1,5 @@
-# A9-Silex-Gen
+# Title..?
 ## About
-This is a base for an apache/ngnix server with PHP and a MySQL database. It uses Silex as a backend framework(loaded with PHP Composer) and tools like Bower and Grunt for the frontend.
 
 ## Fist configuration
 For this app to run, you will need to have PHP composer installed. It is a tool just like npm, but for PHP libs. (Download: getcomposer.org)
@@ -16,7 +15,7 @@ You can start adding routers, controllers and models to your website from the `a
 
 The HTML can be added from the `app/Templates/` folder. The system is using twig as a template engine. You can find that there are already 2 demo templates.
 
-The custom CSS and JS (the one written by you) must be in the `src/css/` and `src/js/` folders. The file names are not a matter (excepting the `init.js` that will be the last one concated). 
+The custom CSS and JS (the one written by you) must be in the `src/css/` and `src/js/` folders. The file names are not a matter (excepting the `init.js` that will be the last one concated).
 
 For adding new JS/CSS libs (like jquery, materializecss, bootstrap, etc) you can install them with Bower:
 ```
@@ -35,7 +34,3 @@ Or, you can also set a watcher like this:
 $ grunt prep && grunt watch
 ```
 but this won't compress the files, so you'll need to run `grunt` again before a deployment.
-
-## Other
-You can freely use it for your project. :)
-It's not yet fully documented (there are some custom twig functions added), and not yet in the best stage of all, so I'll still need to work to make it look better.
