@@ -5,6 +5,8 @@ namespace Controllers;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 
+use Models\DemoModel;
+
 class DemoController implements ControllerProviderInterface{
     public function connect(Application $app){
         $indexController = $app['controllers_factory'];

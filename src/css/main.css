@@ -1,38 +1,11 @@
-html, body{
-    margin: 0;
-    color: #333;
-    font-family: Roboto, sans-serif;
+.chatbody::-webkit-scrollbar {
+    width: 8px;
 }
-.inner{
-    width: 95%;
-    max-width: 960px;
-    margin: auto;
-    /*overflow: hidden;*/
-    display: block;
+.chatbody::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
 }
-.inner:after{
-    content: '';
-    clear: both;
-}
-.topline{
-    padding: 0 10px;
-}
-.topline:after{
-    content: '';
-    display: block;
-    clear: both;
-}
-.topline .logo{
-    display: block;
-    float: left;
-    width: 33.33%;
-    padding: 10px 0;
-    font-size: 20px;
-    color: white;
-    text-decoration: none;
-}
-.topline .menu1{
-    float: left;
-    width: 33.33%;
-    text-align: center;
+.chatbody::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
 }

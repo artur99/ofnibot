@@ -1,0 +1,12 @@
+.emo{
+    font-style: normal;
+    font-size: 18px;
+    line-height: inherit;
+    vertical-align: middle;
+}
+.emo.happy1:before{
+    content: '\1F601';
+}
+.emo.togue1:before{
+    content: '\1F60B';
+}

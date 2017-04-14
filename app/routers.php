@@ -5,4 +5,4 @@
 
 $app->mount('/', new Controllers\IndexController());
 $app->mount('/demo', new Controllers\DemoController());
-$app->mount('/app', new Controllers\MainController());
+$app->mount('/app', new Controllers\AppController());
