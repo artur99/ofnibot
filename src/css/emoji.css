@@ -3,6 +3,9 @@
     font-size: 18px;
     line-height: inherit;
     vertical-align: middle;
+    line-height: 15px;
+    margin-top: -3px;
+    display: inline-block;
 }
 .emo.happy1:before{
     content: '\1F601';

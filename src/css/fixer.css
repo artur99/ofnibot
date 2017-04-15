@@ -137,3 +137,7 @@ input.input-field:not([type]), input.input-field[type=text], input.input-field[t
 .trumbowyg-box, .trumbowyg-editor{
     margin-top: 5px;
 }
+*{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}

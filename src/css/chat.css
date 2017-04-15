@@ -38,7 +38,6 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .chatmain .chattop{
-    background: white;
 }
 .chattop .material-icons{
     line-height: inherit;
@@ -59,9 +58,10 @@
     padding: 0 5px;
 }
 .chatmain .chattop{
+    background: white;
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.1);
-    z-index: 3;
     line-height: 49px;
+    z-index: 3;
 }
 .topbtn{
     display: block;
@@ -71,11 +71,10 @@
     color: #777;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
-.chatinput{
+.chatmain .chatinput{
+    position: relative;
     flex: 0 0 60px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-.chatmain .chatinput{
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.1);
     z-index: 3;
 }
@@ -95,7 +94,7 @@
     border-radius: 5px;
     max-width: 60%;
     font-size: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 .message.m1{
     float: left;
@@ -125,7 +124,7 @@
     display: flex;
     height: 100%;
 }
-.chatmsginput, .chatmsginput:focus{
+.chatmsginput{
     flex: 1;
     display: block;
     background: transparent;
@@ -153,6 +152,27 @@
 #sendico{
     color: #9238fc;
     font-size: 30px;
+}
+.thinking{
+    display: none;
+    position: absolute;
+    top: -22px;
+    line-height: 19px;
+    font-size: 13px;
+    padding-left: 2%;
+}
+.thinking:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    animation: elps 1000ms infinite;
+    content: "\2026";
+    width: 0px;
+}
+@keyframes elps {
+  to{
+      width: 13px;
+  }
 }
 @media(max-width: 500px){
     .inner{

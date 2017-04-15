@@ -2,6 +2,10 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		bower_concat: {
 			basic: {
+				mainFiles: {
+				  'jQuery': 'dist/jquery.min.js',
+				  'noty': ['lib/noty.min.js', 'lib/noty.css']
+				},
 				dest: {
 					js: 'bower_components/bowercomp.js',
 					css: 'bower_components/bowercomp.css'
@@ -29,8 +33,18 @@ module.exports = function(grunt) {
 		concat: {
 		    dist: {
 		      files: [
-		        {src: ['bower_components/bowercomp.js', 'src/js/lib.js', 'src/js/*.js', '!src/js/init.js', 'src/js/init.js'], dest: 'public_html/assets/components/data.js'},
-				{src: ['bower_components/bowercomp.css', 'src/css/*.css', 'src/css/main.css'], dest: 'public_html/assets/components/data.css'}
+		        {src: [
+					'bower_components/bowercomp.js',
+					'src/js/lib.js',
+					'src/js/*.js',
+					'!src/js/init.js',
+					'src/js/init.js'
+				], dest: 'public_html/assets/components/data.js'},
+				{src: [
+					'bower_components/bowercomp.css',
+					'src/css/*.css',
+					'src/css/main.css'
+				], dest: 'public_html/assets/components/data.css'}
 		      ],
 		    },
 		},
@@ -74,7 +88,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.registerTask('default', ['bower_concat', 'concat', 'copy', 'uglify', 'cssmin', 'clean']);
+	grunt.registerTask('default', ['bower_concat', 'concat', 'copy', 'cssmin', 'clean']);
+	grunt.registerTask('default_old_temp', ['bower_concat', 'concat', 'copy', 'uglify', 'cssmin', 'clean']);
 	grunt.registerTask('prep', ['bower_concat', 'concat', 'copy']);
 	grunt.registerTask('dev-watcher', ['concat']);
 };

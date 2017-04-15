@@ -16,6 +16,8 @@
   ],
   "dependencies": {
     "sweetalert": "^1.1.3",
-    "perfect-scrollbar": "^0.6.16"
+    "perfect-scrollbar": "^0.6.16",
+    "jQuery": "^3.2.1",
+    "noty": "^3.0.1"
   }
 }
