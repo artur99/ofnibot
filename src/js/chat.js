@@ -30,6 +30,7 @@ function parseForEmoji(text){
     rpls.push([':P', ':P']);
     rpls.push([':D', ':D']);
     rpls.push([';\\)', ';)']);
+    rpls.push([':\\(', ':(']);
 
     for(var i=0;i<rpls.length;i++){
         //   /(^|\s)(:\))($|\s)/g
@@ -38,4 +39,14 @@ function parseForEmoji(text){
     }
 
     return text;
+}
+
+function getUnicodeChar(emoticon){
+    var data = [];
+    data[':)'] = '\u{1F60A}';
+    data[':D'] = '\u{1F601}';
+    data[':P'] = '\u{1F60B}';
+    data[';)'] = '\u{1F609}';
+    data[':('] = '\u{1F641}';
+    return typeof data[emoticon] == 'undefined' ? '' : data[emoticon];
 }
