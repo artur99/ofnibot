@@ -81,6 +81,7 @@ $app['csrf'] = $app->share(function () {
     return new CsrfTokenManager();
 });
 $app['twig'] = $app->share($app->extend('twig', function($twig,$app){
+    $twig->addGlobal('title', $app['conf.title']);
     $twig->addExtension(new Twig_Extensions_Extension_Text());
     $twig->addFunction(new Twig_SimpleFunction('asset', function ($asset)use($app){
         if(strpos($asset, '://') !== false) return $asset;

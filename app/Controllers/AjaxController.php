@@ -4,6 +4,9 @@ namespace Controllers;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use AiClasses\IdentifierClass;
 
 class AjaxController implements ControllerProviderInterface{
     public function connect(Application $app){
@@ -18,6 +21,24 @@ class AjaxController implements ControllerProviderInterface{
     }
     public function handleMessage(Application $app){
         // return $app['twig']->render('app.twig');
-        return 1;
+        $data = $app['request']->request->all();
+
+        $idf = new IdentifierClass($app, $data['message']);
+
+        if($msss = $idf->firstCheck()){
+            $message = $msss;
+        }else if($msss = $idf->expectedReply()){
+            $message = $msss;
+        }else if($msss = $idf->mainCheck()){
+            $message = $msss;
+        }else{
+            $message = $idf->fallbackMessage();
+        }
+
+        $resp = new JsonResponse();
+	    $resp->setData([
+            'response' => $message
+        ]);
+	    return $resp;
     }
 }

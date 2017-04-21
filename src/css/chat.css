@@ -84,6 +84,7 @@
 }
 .chatmain .chatbody{
     overflow-y: scroll;
+    padding-bottom: 15px;
 }
 .message{
     position: relative;
@@ -95,6 +96,7 @@
     max-width: 60%;
     font-size: 15px;
     margin-bottom: 10px;
+    word-wrap: break-word;
 }
 .message.m1{
     float: left;
@@ -119,6 +121,18 @@
     background: linear-gradient(-45deg, #9238fc , #c655ef);
     color: white;
     border-radius: 10px;
+}
+.message.is_file{
+    background: white;
+    color: #333;
+    border: 3px solid #8f37fd;
+}
+.message.is_image{
+    padding: 3px;
+    max-width: 40%;
+}
+.message a{
+    color: #333;
 }
 #chatform{
     display: flex;
@@ -169,6 +183,18 @@
     content: "\2026";
     width: 0px;
 }
+.dropover{
+    display: none;
+}
+.dropover{
+    width: 95vh;
+    width: 95vw;
+    margin: 2.5vw 2.5vh;
+    background: red;
+}
+body.dragging .dropover{
+    display: block;
+}
 @keyframes elps {
   to{
       width: 13px;
@@ -179,7 +205,8 @@
         width: 97%;
     }
     .chatbase{
-        height: 98vh;
+        height: 88vh;
+        height: calc(100vh-75px);
     }
     .chatinfo{
         display: none;
@@ -187,6 +214,9 @@
     .message{
         max-width: 100%;
         padding: 8px 14px;
+    }
+    .sec1.v2{
+        min-height: auto;
     }
 }
 @media(max-width: 750px){

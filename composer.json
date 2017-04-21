@@ -16,7 +16,8 @@
         "psr-0": {
             "Controllers": "app/",
             "Models": "app/",
-            "Misc": "app/"
+            "Misc": "app/",
+            "AiClasses": "app/"
         }
     }
 }

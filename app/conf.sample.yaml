@@ -1,6 +1,6 @@
 debug: true
 
-conf.title: 'Titlu site'
+conf.title: 'OfniBot'
 
 conf.timezone: 'Europe/Bucharest'
 
@@ -12,3 +12,6 @@ conf.db.name: nume_db
 conf.facebook.use: 0
 conf.facebook.app_id:
 conf.facebook.app_secret:
+
+conf.api_keys.tmdb: '###'
+conf.api_keys.lastfm: '###'

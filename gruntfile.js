@@ -4,6 +4,7 @@ module.exports = function(grunt) {
 			basic: {
 				mainFiles: {
 				  'jQuery': 'dist/jquery.min.js',
+				  'zbarjs': 'zbar-processor.js',
 				  'noty': ['lib/noty.min.js', 'lib/noty.css']
 				},
 				dest: {

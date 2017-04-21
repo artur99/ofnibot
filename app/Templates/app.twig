@@ -17,7 +17,7 @@
                     <div class="chatinfo">
                         <a href="" class="chattop chattoplogo">
                             <i class="material-icons left">&#xE5CB;</i>
-                            Smarty Index
+                            {{title}}
                         </a>
                         <div class="chatbody">
                             aa
@@ -29,7 +29,7 @@
                                 <!-- data-position="bottom" data-tooltip="About us" -->
                                 <i class="material-icons">&#xE87F;</i>
                             </a>
-                            <a href="#" class="topbtn tooltipped" title="How to use the bot?">
+                            <a href="#" class="topbtn tooltipped" id="helpnsend" title="How to use the bot?">
                                 <i class="material-icons">&#xE887;</i>
                             </a>
                         </div>
@@ -42,6 +42,7 @@
                             <div class="thinking">Please wait, the robot is thinking</div>
                             <form action="" id="chatform">
                                 <a href="#" class="material-icons" id="attachico">&#xE439;</a>
+                                <input type="file" class="hide" id="attachinput">
                                 <input type="text" class="chatmsginput" placeholder="Type your message...">
                                 <button type="submit" class="material-icons" id="sendico">&#xE163;</button>
                             </form>
@@ -52,6 +53,7 @@
         </div>
     </div>
     <div class="graph1 v2"></div>
+    <div class="dropover"></div>
     {% include 'part/scripts.twig' %}
 </body>
 </html>
