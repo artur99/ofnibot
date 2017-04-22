@@ -1,11 +1,16 @@
-# OfniBot
+# OfniBot (v1.0.0)
 The prototype of a new index
+
+## Demo
+[ofnibot.artur99.net]
 
 ## About
 Ofnibot offers you an interesting, funny and easy way of finding and comparing different entities on the internet, using some of the biggest databases of movies, songs, product barcodes and a lot more.
 
-## Fist configuration
-For this app to run, you will need to have PHP composer installed. It is a tool just like npm, but for PHP libs. (Download: getcomposer.org)
+## Installation
+Requirements: `git`, `composer`, `node.js`.
+
+Config file: `app/conf.yaml`.
 ```
 $ npm install -g bower grunt-cli
 $ npm update
@@ -27,3 +32,25 @@ We've been using for this app these websites for searching things:
 * Digit-Eyes.com
 * TMDb
 * Live.fm
+
+### Tehnologii
+* [Composer]
+* [Node.js]
+* [Bower]
+* [Grunt]
+* [Silex Micro Framework]
+* [jQuery]
+
+   [Composer]: <https://getcomposer.org/>
+   [node.js]: <http://nodejs.org>
+   [bower]: <http://bower.io/>
+   [materializecss]: <http://materializecss.com/>
+   [Silex Micro Framework]: <http://silex.sensiolabs.org/>
+   [grunt]: <http://gruntjs.com/>
+   [ofnibot.artur99.net]: <http://ofnibot.artur99.net/>
+   [Nasticom.ro]: <http://nasticom.ro>
+   [Enevila.ro]: <http://enevila.ro>
+   [EanData.com]: <http://eandata.com>
+   [Digit-Eyes.com]: <http://digit-eyes.com>
+   [TMDb]: <https://www.themoviedb.org>
+   [Live.fm]: <https://www.last.fm>
