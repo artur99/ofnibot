@@ -1,36 +1,29 @@
-# Title..?
+# OfniBot
+The prototype of a new index
+
 ## About
+Ofnibot offers you an interesting, funny and easy way of finding and comparing different entities on the internet, using some of the biggest databases of movies, songs, product barcodes and a lot more.
 
 ## Fist configuration
 For this app to run, you will need to have PHP composer installed. It is a tool just like npm, but for PHP libs. (Download: getcomposer.org)
 ```
-$ npm install -g bower grunt-cli    // Global Bower and Grunt
-$ npm update                        // Local package requirements
-$ composer install                  // Silex frameworks and other tools
-```
-This will prepare the project. Then you will need to edit & set some things like the title, database, timezone, etc in the config file(`app/conf.yaml`).
-Also, you will need to set apache to boot on `public_html/`, but the PHP should have access in the root (`./`) directory
-## Usage
-You can start adding routers, controllers and models to your website from the `app/` folder. There are already 2 demos set: for the `/` and `/demo/` routes, connected to the controllers and a `DemoModel`.
-
-The HTML can be added from the `app/Templates/` folder. The system is using twig as a template engine. You can find that there are already 2 demo templates.
-
-The custom CSS and JS (the one written by you) must be in the `src/css/` and `src/js/` folders. The file names are not a matter (excepting the `init.js` that will be the last one concated).
-
-For adding new JS/CSS libs (like jquery, materializecss, bootstrap, etc) you can install them with Bower:
-```
-$ bower install <package_name> --save
-```
-These packages will be downloaded in a temporary folder(ignored by gitignore), and then, when `grunt` command is runned, they will be taken, concated with the css & js from the `src/` directory, compressed, then moved to a public directory: `public_html/assets/components.js` & `public_html/assets/components.css`. They will be, then, availabel to the link:
-`/assets/components.css` and `/assets/components.js`. So in the HTML, you should point to them like this:
-`<link rel="stylesheet" href="/assets/components.css">`, and
-`<script src="/assets/components.js"></script>`.
-Grunt must be used after editing files from `src/` like this:
-```
+$ npm install -g bower grunt-cli
+$ npm update
+$ composer install
+$ bower install
 $ grunt
 ```
-Or, you can also set a watcher like this:
+Development watcher fro bower:
 ```
 $ grunt prep && grunt watch
 ```
-but this won't compress the files, so you'll need to run `grunt` again before a deployment.
+and a `grunt` at the end for them to be compressed and cleaned up.
+
+## 3rd party services
+We've been using for this app these websites for searching things:
+* Nasticom.ro
+* Enevila.ro
+* EanData.com
+* Digit-Eyes.com
+* TMDb
+* Live.fm
