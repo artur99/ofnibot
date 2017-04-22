@@ -26,20 +26,25 @@ and a `grunt` at the end for them to be compressed and cleaned up.
 
 ## 3rd party services
 We've been using for this app these websites for searching things:
-* Nasticom.ro
-* Enevila.ro
-* EanData.com
-* Digit-Eyes.com
-* TMDb
-* Live.fm
+* [Nasticom.ro]
+* [Enevila.ro]
+* [EanData.com]
+* [Digit-Eyes.com]
+* [TMDb]
+* [Live.fm]
 
-### Tehnologii
+### Technologies
 * [Composer]
 * [Node.js]
 * [Bower]
 * [Grunt]
 * [Silex Micro Framework]
-* [jQuery]
+
+### Languages
+* HTML
+* CSS
+* JS (client + backend for development)
+* PHP
 
    [Composer]: <https://getcomposer.org/>
    [node.js]: <http://nodejs.org>
