@@ -25,7 +25,7 @@ $ grunt prep && grunt watch
 and a `grunt` at the end for them to be compressed and cleaned up.
 
 ## 3rd party services
-We've been using for this app these websites for searching things:
+We've been using for this app these websites as APIs:
 * [Nasticom.ro]
 * [Enevila.ro]
 * [EanData.com]
