@@ -16,3 +16,6 @@ conf.facebook.app_secret:
 
 conf.api_keys.tmdb: '###'
 conf.api_keys.lastfm: '###'
+conf.api_keys.eandata: '###'
+conf.api_keys.digiteyes_app: '/###'
+conf.api_keys.digiteyes_auth: '###'
