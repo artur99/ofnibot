@@ -1,6 +1,7 @@
 debug: true
 
 conf.title: 'OfniBot'
+conf.appname: 'OfniBot'
 
 conf.timezone: 'Europe/Bucharest'
 

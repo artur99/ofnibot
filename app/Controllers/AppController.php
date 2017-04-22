@@ -12,6 +12,8 @@ class AppController implements ControllerProviderInterface{
         return $indexController;
     }
     public function index(Application $app){
-        return $app['twig']->render('app.twig');
+        return $app['twig']->render('app.twig', [
+            'title' => 'App Interface'
+        ]);
     }
 }

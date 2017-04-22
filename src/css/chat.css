@@ -134,6 +134,59 @@
 .message a{
     color: #333;
 }
+.message .dbox {
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 3px 5px;
+    border-radius: 5px;
+    line-height: 15px;
+    text-decoration: none;
+    margin-top: 5px;
+    background: rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+}
+.message .dbox:first-child {
+    margin-bottom: 10px;
+}
+.message .dbox h3 {
+    margin: 0;
+    font-size: 16px;
+    text-decoration: none;
+}
+.message .dbox small {
+    color: #777;
+}
+.message .dbox_song {
+    line-height: 15px;
+    background-image: url(http://lastfm-img2.akamaized.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.png);
+    background-repeat: no-repeat;
+    background-position: 2px center;
+    background-size: auto 33px;
+    padding-left: 40px;
+}
+
+.message .dbox_movie {
+    padding: 4px 4px;
+}
+.message .dbox_movie h3 {
+    margin-top: 2px;
+    margin-bottom: 7px;
+}
+.message .dbox_movie img {
+    float: left;
+    width: 60px;
+    margin-right: 7px;
+    border-radius: 3px;
+}
+
+.message .dbox_product{
+    padding: 5px 9px;
+    margin-bottom: 10px;
+}
+.message .dbox_product h3{
+    margin-bottom: 4px;
+}
+
 #chatform{
     display: flex;
     height: 100%;
@@ -204,9 +257,12 @@ body.dragging .dropover{
     .inner{
         width: 97%;
     }
+    body.appbody, body.appbody .sec1, body.appbody .inner, body.appbody .cont{
+        height: 100%;
+    }
     .chatbase{
-        height: 88vh;
-        height: calc(100vh-75px);
+        height: 98%;
+        margin: 1% auto;
     }
     .chatinfo{
         display: none;

@@ -18,6 +18,7 @@ class IdentifierClass{
         $this->message_s = $this->slug($msg);
         $this->session = $app['session'];
         $this->fetcher = new FetcherClass($app);
+        $this->appname = $app['conf.appname'];
     }
 
     function firstCheck(){
@@ -37,6 +38,7 @@ class IdentifierClass{
 
     function mainCheck(){
         $msg = $this->message_s;
+        $msg_full = $this->message;
         if(
             ($movie = $this->grammarMatch($msg, 'movie')) ||
             ($movie = $this->grammarMatch($msg, 'film'))
@@ -75,7 +77,7 @@ class IdentifierClass{
                 return "Sorry, that's been an invalid barcode. :(";
             }
             // return false;
-        }else if($simple = $this->simpleCheck($msg)){
+        }else if($simple = $this->simpleCheck($msg, $msg_full)){
             return $simple;
         }
 
@@ -94,6 +96,14 @@ class IdentifierClass{
             $res = $this->extractAndGenerateMessage('song', $this->simplify($msg));
         }else if($reply == 'barcode'){
             $res = $this->extractAndGenerateMessage('barcode', $this->simplify($msg));
+        }else if($reply == 'howru2'){
+            if($this->matcher($msg, ['*bad*', '*sad*', '*not-fine*', '*not-*good*', '*not-*-well*', '*not-*-fine*'])){
+                $res = $this->messageSeries('howru2_n');
+            }elseif($this->matcher($msg, ['*fine*', '*good*', '*well*', '*happy*'])){
+                $res = $this->messageSeries('howru2_a');
+            }else{
+                $res = $this->messageSeries('howru2_u');
+            }
         }else if($msg = $this->messageSeries($reply)){
             $res = $msg;
         }
@@ -118,6 +128,16 @@ class IdentifierClass{
     function unslug2($txt){
         $txt = str_replace('-', ' ', $txt);
         return ucwords(trim($txt));
+    }
+
+    function isEmoticon($txt){
+        $dt = trim($txt);
+        return in_array($dt, [':)', ':(', ':P', ';)', ':D']);
+    }
+
+    function truncate($txt, $len){
+        $txt = trim($txt, '.');
+        return S::create($txt)->safeTruncate($len)->__toString().'...';
     }
 
     function matcher($text, $array_of_matches){
@@ -156,6 +176,7 @@ class IdentifierClass{
                 }else{
                     // .... <entity_name> entity_type
                     $kr = explode('identify', $dt[0], 2);
+                    $kr = explode('find', end($kr), 2);
                     $fin = end($kr);
                 }
 
@@ -180,16 +201,30 @@ class IdentifierClass{
         return $this->messageSeries('fallback');
     }
 
-    private function simpleCheck($msg){
+    private function simpleCheck($msg, $msg_full){
         $msg = $this->slug($msg);
-        if($this->matcher($msg, ['hi', 'hello', 'hey', 'heyy', 'hi-*robot', 'hey-*robot', 'hello-*robot']))
+        if($this->matcher($msg, ['hi', 'hello', 'hey', 'heyy', 'hi-*robot', 'hey-*robot', 'hello-*robot', 'howdy']))
             return $this->messageSeries('hello');
-        if($this->matcher($msg, ['who-are-you', 'what-are-you', 'wh*your-name'])){
-            $this->rememberToContinue('name2');
-            return $this->messageSeries('name1');
+        if($this->matcher($msg, ['yo', 'yoo', 'yooo'])){
+            $this->rememberToContinue('set', 'howru2');
+            return $this->messageSeries('yo');
+        }
+        if($this->matcher($msg, ['*-your-name', 'your-name', 'who-are-you', 'what-are-you', 'wh*your-name'])){
+            $this->rememberToContinue('set', 'name2');
+            return $this->messageSeries('name');
+        }
+        if($this->matcher($msg, ['what-are-you-doing', 'what-do-you-know*', 'what-you-know*', 'what-can-you-do', 'what-do-you-know', 'what-you*-identify*'])){
+            return $this->messageSeries('help');
+        }
+        if($this->matcher($msg, ['how-are-you*', 'whats-up*', 'how-do-you-do', 'how-do-you-do-*'])){
+            $this->rememberToContinue('set', 'howru2');
+            return $this->messageSeries('howru');
         }
         if($this->matcher($msg, ['thank-you', 'thank-you-*', 'thanks', 'thanks-*'])){
             return $this->messageSeries('welcome');
+        }
+        if($this->isEmoticon($msg_full)){
+            return $this->messageSeries('emoji');
         }
     }
 
@@ -197,9 +232,9 @@ class IdentifierClass{
         $replies = [];
         if($which == 'help'){
             $replies = [
-                'My name is <...>. :) I can help you identifying different things like producs by barcode, movies, songs, etc., and then giving you related information on them.'
+                'My name is '.$this->appname.'. :) I can help you identifying different things like producs by barcode, movies, songs, etc., and then giving you related information on them.'
                 .' For more help, <a href="/help" target="_blank">click here</a>.'."\n"
-                .' (For eg., you can simply tell me "This movie: `movie-name`", or "A barcode: `123456789`", or you can just drag a picture of a barcode here)'."\n"
+                .' (For eg., you can simply tell me "This movie: `movie-name`", or "A barcode: `123456789`", or you can just drop a picture of a barcode here)'."\n"
                 .' What would you like me to identify? :D '
                 // 'I am a robot1. :D'
             ];
@@ -215,23 +250,46 @@ class IdentifierClass{
                 'Heyy! :D',
                 'Howdy! How can I help you? :D'
             ];
-        }elseif($which == 'name1'){
+        }elseif($which == 'yo'){
             $replies = [
-                'My name is <...>. But what\'s your name? :D'
+                'Yoo, broo, what\'s up?'
+            ];
+        }elseif($which == 'name'){
+            $replies = [
+                'My name is '.$this->appname.'. But what\'s your name? :D'
             ];
         }elseif($which == 'name2'){
+            $ex = explode('is-', $this->message_s);
             $replies = [
-                'Nice to meet you! '.$this->unslug2($this->splitter2($this->message_s, 'is')).':)'
+                'Nice to meet you, '.$this->unslug2(end($ex)).'! :)'
             ];
         }elseif($which == 'welcome'){
             $replies = [
                 'You\'re welcome! It\'s been a pleasure for me to help you! :)'
+            ];
+        }elseif($which == 'howru'){
+            $replies = [
+                'I\'m fine, thank you for the question! :) But what about you? How are you?'
+            ];
+        }elseif($which == 'howru2_u'){
+            $replies = [
+                'Ooh! :D'
+            ];
+        }elseif($which == 'howru2_a'){
+            $replies = [
+                'That\'s great! :D'
+            ];
+        }elseif($which == 'howru2_n'){
+            $replies = [
+                'Aaah, I\'m sorry for you. :('
             ];
         }elseif($which == 'fallback'){
             $replies = [
                 'I\'m sorry, I can\'t understand what you mean. :( I still have to lern. Type `help` for more info.',
                 'Sorry, but I am not yet developed enough to understand what you meant. :( Type `help` for more info.'
             ];
+        }elseif($which == 'emoji'){
+            $replies = [':)', ';)', ':D', ':P'];
         }
         $loc = rand(0, sizeof($replies)-1);
         return isset($replies[$loc]) ? $replies[$loc] : false;
@@ -243,11 +301,24 @@ class IdentifierClass{
             if(!$md){
                 return "Sorry, I couldn't find the movie in any database. :(";
             }else{
-                $txt = 'I found the movie: <a href="'.$md['link'].'" target="_blank">'.$md['title'].' ('.$md['release_year'].')</a>'."\n";
-                $txt.= 'Here you have some related movies:'."\n";
-                $k = 1;
-                foreach($md['simi'] as $mov){
-                    $txt.= ($k++).'. <a href="'.$mov['link'].'" target="_blank">'.$mov['title'].' ('.$mov['release_year'].')</a>'."\n";
+                $txt = 'I found the movie:';
+                $txt.= '<a class="dbox dbox_movie" href="'.$md['link'].'" target="_blank">';
+                $txt.= '<img src="'.$md['image'].'">';
+                $txt.= '<h3>'.$md['title'].' ('.$md['release_year'].')</h3>';
+                $txt.= '<small>'.$this->truncate($md['overview'], 130).'</small>';
+                $txt.= '</a>';
+                if(sizeof($md['simi']) == 0){
+                    $txt .= 'But I couldn\'t find any related movies. :(';
+                }else{
+                    $txt.= 'And I also found some related movies: :D'."\n";
+                    $k = 1;
+                    foreach($md['simi'] as $md){
+                        $txt.= '<a class="dbox dbox_movie" href="'.$md['link'].'" target="_blank">';
+                        $txt.= '<img src="'.$md['image'].'">';
+                        $txt.= '<h3>'.$md['title'].' ('.$md['release_year'].')</h3>';
+                        $txt.= '<small>'.$this->truncate($md['overview'], 130).'</small>';
+                        $txt.= '</a>';
+                    }
                 }
                 return $txt;
             }
@@ -256,10 +327,46 @@ class IdentifierClass{
             if(!$md){
                 return "Sorry, I couldn't find the song in any database. :(";
             }else{
-                $txt = 'I found the song: <a href="'.$md['link'].'" target="_blank">'.$md['artist'].' - '.$md['name'].'</a>'."\n";
-                $txt.= '';
+                $txt = 'I found the song:';
+                $txt.= '<a class="dbox dbox_song" href="'.$md['link'].'" target="_blank">';
+                $txt.= '<h3>'.$md['name'].'</h3>';
+                $txt.= '<small>'.$md['artist'].'</small>';
+                $txt.= '</a>';
+
+                if(sizeof($md['simi']) == 0){
+                    $txt .= 'But I couldn\'t find any related songs. :(';
+                }else{
+                    $txt.= 'And I also found some related songs: :D'."\n";
+                    $k = 1;
+                    foreach($md['simi'] as $md){
+                        $txt.= '<a class="dbox dbox_song" href="'.$md['link'].'" target="_blank">';
+                        $txt.= '<h3>'.$md['name'].'</h3>';
+                        $txt.= '<small>'.$md['artist'].'</small>';
+                        $txt.= '</a>';
+                    }
+                }
                 return $txt;
             }
+        }else if($type == 'barcode'){
+            $md = $this->fetcher->fetchBarcode($name);
+            if(!$md){
+                return "Sorry, I couldn't find the barcode in any database. :(\n"
+                    .'You could try a search on <a href="http://google.com/search?q='.$name.'">Google</a>.';
+            }else{
+                $txt = 'I found the barcode! :D ';
+                $txt.= '<div class="dbox dbox_product">';
+                $txt.= '<h3>'.$md['name'].'</h3>';
+                $txt.= '<small>'.($md['ingredients']?'Ingredients: '.$md['ingredients']:'No info about ingredients...').'</small>';
+                $txt.= '</div>';
+                $txt.= 'You could compare the product here:'."\n";
+
+                foreach($md['links'] as $md){
+                    $txt.= '<a class="dbox dbox_shop" href="'.$md['link'].'" target="_blank">';
+                    $txt.= '<h3>'.$md['name'].'</h3>';
+                    $txt.= '</a>';
+                }
+            }
+            return $txt;
         }else{
             return 'No data found. :(';
         }
