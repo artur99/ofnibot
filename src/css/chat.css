@@ -86,6 +86,12 @@
     overflow-y: scroll;
     padding-bottom: 15px;
 }
+.chatinfo .chatbody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 40%;
+}
 .message{
     position: relative;
     background: white;
@@ -280,7 +286,9 @@ body.dragging .dropover{
 .txtltl{
     font-size: 23px;
 }
-
+.txtltl2{
+    font-size: 17px;
+}
 
 @media(max-width: 500px){
     .inner{
