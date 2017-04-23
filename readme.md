@@ -32,6 +32,7 @@ We've been using for this app these websites as APIs:
 * [Digit-Eyes.com]
 * [TMDb]
 * [Last.fm]
+* [FreeGeoIP]
 
 ### Technologies
 * [Composer]
@@ -59,3 +60,4 @@ We've been using for this app these websites as APIs:
    [Digit-Eyes.com]: <http://digit-eyes.com>
    [TMDb]: <https://www.themoviedb.org>
    [Last.fm]: <https://www.last.fm>
+   [FreeGeoIP]: <http://freegeoip.net>
