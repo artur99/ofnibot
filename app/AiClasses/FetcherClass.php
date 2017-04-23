@@ -259,7 +259,7 @@ class FetcherClass{
             return 'https://www.walmart.com/search/?query='.urlencode($query).'';
         }elseif($type == 'google'){
             // Search Google
-            return 'http://googe.com/search?q='.urlencode($query).'';
+            return 'http://google.com/search?q='.urlencode($query).'';
         }elseif($type == 'country'){
             return 'http://freegeoip.net/json/'.urlencode($query);
         }
