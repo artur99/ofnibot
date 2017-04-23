@@ -13,7 +13,7 @@ class AppController implements ControllerProviderInterface{
     }
     public function index(Application $app){
         return $app['twig']->render('app.twig', [
-            'title' => 'App Interface'
+            'title' => 'Chat'
         ]);
     }
 }

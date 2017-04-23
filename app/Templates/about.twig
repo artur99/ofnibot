@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'part/head.twig' %}
+</head>
+<body>
+    <div class="sec1">
+        <div class="inner">
+            {% include 'part/topline.twig' %}
+            <div class="landingcont big">
+                <div class="lcleft">
+                    <h2>About OfniBot</h2>
+                    <p>Ofnibot offers you an interesting, funny and easy way of finding and comparing different entities on the internet, using some of the biggest databases of movies, songs, product barcodes and a lot more.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="graph1"> </div>
+    <div class="sec2">
+        <div class="inner">
+            <h3>3rd Party Serices used</h3>
+            <div class="secintxt">
+                <p>Ofnibot is an intelligent bot that offers you an interesting, funny and easy way of finding and comparing different entities on the internet, using some of the biggest databases of movies, songs, product barcodes and more.</p>
+                <p>It's code is open source and can be found on GitHub (take a look at the link at the top).</p>
+                <p>We've been using these APIs for gathering data from the internet: </p>
+                <ul>
+                    <li><a href="http://eandata.com">EanData.com</a></li>
+                    <li><a href="http://digit-eyes.com">Digit-Eyes.com</a></li>
+                    <li><a href="http://themoviedb.org">TMDb</a></li>
+                    <li><a href="http://last.fm">Live.fm</a></li>
+                </ul>
+                <p>And beside these, we're using these website to do some product checks:</p>
+                <ul>
+                    <li><a href="http://nasticom.ro">Nasticom.ro</a></li>
+                    <li><a href="http://enevila.ro">Enevila.ro</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    {% include 'part/footer.twig' %}
+    {% include 'part/scripts.twig' %}
+</body>
+</html>

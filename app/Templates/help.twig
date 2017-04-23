@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'part/head.twig' %}
+</head>
+<body>
+    <div class="sec1">
+        <div class="inner">
+            {% include 'part/topline.twig' %}
+            <div class="landingcont big">
+                <div class="lcleft">
+                    <h2>Help Section</h2>
+                    <p>Know how this OfniBot works and what it does know to do.</p>
+                    <a href="{{l('/app')}}" class="coolbtn">Run the bot</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="graph1"> </div>
+    <div class="sec2">
+        <div class="inner">
+            <h3>What does the robot know to do?</h3>
+            <div class="secintxt">
+                <p>One of the first things the robot knows to do is to intelligenlty talk to you. You can salute it, you can ask it for help, you can ask it for its name, or even how's it doing.</p>
+                <p>
+                    Now, returning to some real features, the robot can tell you some movie alternatives. All you have to tell him is: <code>Identify a movie</code>, then just send the movie name.
+                    Alternatively, you can just type one line like this: <code>ofnibot, find this movie: the matrix</code>.
+                </p>
+                <p>The bot can also identify and list similar songs. It would work just like for the movies, just tell the robot that you want to identify a song, and then drop the name of the song. Example: <code>Please identify a song: walker faded</code>.</p>
+                <p> Another thing the robot knows to do is to find a product matching the barcode you'll send. For example, sending this barcode: <code>0076808513981</code>(or uploading an image containing it) would make the bot search in some databases and then tell you what's the name of the product, give you the ingredients if there's any information on this, and give you some links where you could find to compare the prices and eventually buy them.</p>
+                <p>This identification has a different path if the user is identified to be in a certain country. At the moment, it's only set for Romania, so, if someone from Romania would send a barcode, the robot would first check some romanian websites, and will also provide back some romanian shop links.</p>
+            </div>
+
+        </div>
+    </div>
+    {% include 'part/footer.twig' %}
+    {% include 'part/scripts.twig' %}
+</body>
+</html>

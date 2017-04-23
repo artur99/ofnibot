@@ -31,7 +31,7 @@ We've been using for this app these websites as APIs:
 * [EanData.com]
 * [Digit-Eyes.com]
 * [TMDb]
-* [Live.fm]
+* [Last.fm]
 
 ### Technologies
 * [Composer]
@@ -58,4 +58,4 @@ We've been using for this app these websites as APIs:
    [EanData.com]: <http://eandata.com>
    [Digit-Eyes.com]: <http://digit-eyes.com>
    [TMDb]: <https://www.themoviedb.org>
-   [Live.fm]: <https://www.last.fm>
+   [Last.fm]: <https://www.last.fm>

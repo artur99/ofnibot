@@ -7,6 +7,17 @@ html, body{
 html {
    height: 100%;
 }
+a{
+    color: #333;
+}
+code{
+    line-height: inherit;
+    vertical-align: middle;
+    background: #eee;
+    padding: 3px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
 .inner{
     width: 95%;
     max-width: 960px;
@@ -160,13 +171,52 @@ html {
     background-repeat: no-repeat;
     min-height: 70vh;
 }
-
-
+.landingcont.big .lcleft{
+    float: none;
+    text-align: center;
+    width: 100%;
+}
+.landingcont.big h2{
+    font-size: 56px;
+}
+.sec2{
+    padding-bottom: 90px;
+}
+.sec2 h3{
+    font-size: 40px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+.sec2 .secintxt{
+    padding: 0 20px;
+}
+.sec2 .secintxt ul li{
+    list-style-type:none;
+    padding-bottom: 4px;
+}
+.footer{
+    background: #333;
+    color: #fff;
+    padding: 70px 0;
+    line-height: 30px;
+}
+.footer a{
+    color: #fff;
+}
 @media(max-width: 500px){
     .landingcont .lcright{
         display: none;
     }
     .landingcont .lcleft{
         width: 100%;
+    }
+    .inner{
+        width: 90%;
+        text-align: center;
+    }
+    a.logo, .menu1, .menu2 {
+        display: block!important;
+        width: 100%!important;
+        text-align: center!important;
     }
 }

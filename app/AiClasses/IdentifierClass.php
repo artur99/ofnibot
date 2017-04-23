@@ -351,20 +351,24 @@ class IdentifierClass{
             $md = $this->fetcher->fetchBarcode($name);
             if(!$md){
                 return "Sorry, I couldn't find the barcode in any database. :(\n"
-                    .'You could try a search on <a href="http://google.com/search?q='.$name.'">Google</a>.';
+                    .'You could try a search on <a href="http://google.com/search?q='.$name.'" target="_blank">Google</a>.';
             }else{
                 $txt = 'I found the barcode! :D ';
                 $txt.= '<div class="dbox dbox_product">';
                 $txt.= '<h3>'.$md['name'].'</h3>';
                 $txt.= '<small>'.($md['ingredients']?'Ingredients: '.$md['ingredients']:'No info about ingredients...').'</small>';
                 $txt.= '</div>';
-                $txt.= 'You could compare the product here:'."\n";
+                $txt.= 'You can compare the product here:'."\n";
 
-                foreach($md['links'] as $md){
-                    $txt.= '<a class="dbox dbox_shop" href="'.$md['link'].'" target="_blank">';
-                    $txt.= '<h3>'.$md['name'].'</h3>';
+                foreach($md['links'] as $md2){
+                    $txt.= '<a class="dbox dbox_shop" href="'.$md2['link'].'" target="_blank">';
+                    $txt.= '<h3>'.$md2['name'].'</h3>';
                     $txt.= '</a>';
                 }
+                $txt.= 'Or, would you like to take a look on Google?'."\n";
+                $txt.= '<a class="dbox dbox_shop" href="'.$md['google_link'].'" target="_blank">';
+                $txt.= '<h3>Google</h3>';
+                $txt.= '</a>';
             }
             return $txt;
         }else{

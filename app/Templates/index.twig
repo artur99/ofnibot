@@ -6,23 +6,13 @@
 <body>
     <div class="sec1">
         <div class="inner">
-            <div class="topline">
-                <a href="{{'/'}}" class="logo"><img src="{{asset('images/logo.png')}}"> {{appname}}</a>
-                <div class="menu1">
-                    <a href="{{'/about'}}">About us</a>
-                    <a href="{{'/help'}}">Help</a>
-                </div>
-                <div class="menu2">
-                    <a href="http://github.com/artur99/ofnibot">GitHub Repo</a>
-                    <a href="{{l('/app')}}">Run the App</a>
-                </div>
-            </div>
+            {% include 'part/topline.twig' %}
             <div class="landingcont">
                 <div class="lcleft">
                     <h2>The prototype of a new index</h2>
                     <p>Ofnibot offers you an interesting, funny and easy way of finding and comparing different entities on the internet, using some of the biggest databases of movies, songs, product barcodes and a lot more.</p>
                     <a href="{{l('/app')}}" class="coolbtn">Run the bot</a>
-                    <a href="{{l('/app')}}" class="coolbtn s2">Run the bot</a>
+                    <a href="{{l('/about')}}" class="coolbtn s2">About us</a>
                 </div>
                 <div class="lcright">
                     <!-- <img src="{{asset('images/logo2.png')}}" alt=""> -->
@@ -31,9 +21,7 @@
 
         </div>
     </div>
-    <div class="graph1">
-
-    </div>
+    <div class="graph1"> </div>
     {% include 'part/scripts.twig' %}
 </body>
 </html>
