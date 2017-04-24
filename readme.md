@@ -41,6 +41,9 @@ We've been using for this app these websites as APIs:
 * [Grunt]
 * [Silex Micro Framework]
 
+## Security
+The messages are filtered each time, so there couldn't be any XSS in the page, and also, there would be no way of running malicious code sent by the user. Each ajax request has a CSRF key, so it would be impossible to run any unwanted code.
+
 ### Languages
 * HTML
 * CSS
