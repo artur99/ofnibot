@@ -156,7 +156,8 @@ class FetcherClass{
         if($found === false){
             $found_en = false;
             $url1 = $this->apiHelper('barcode1', $barcode); //eandata
-            $url2 = $this->apiHelper('barcode2', $barcode); //digit eyes
+            // $url2 = $this->apiHelper('barcode2', $barcode); //digit eyes
+            $url2 = "http://31.5.80.114/mirror.php?url=".urlencode($this->apiHelper('barcode2', $barcode)); //digit eyes
             $api1 = @json_decode($this->wget($url1));
             if($api1 && isset($api1->product, $api1->product->attributes, $api1->product->attributes->product)){
                 $found_en = $api1->product->attributes->product;
