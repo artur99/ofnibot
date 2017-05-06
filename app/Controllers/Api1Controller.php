@@ -108,6 +108,7 @@ class Api1Controller implements ControllerProviderInterface{
 
         $resp->setCharset('UTF-8');
         $resp->headers->set('Content-Type', $content_type);
+        $resp->headers->set('Access-Control-Allow-Origin', '*');
         $resp->setContent($content);
         $resp->setStatusCode($code);
 
