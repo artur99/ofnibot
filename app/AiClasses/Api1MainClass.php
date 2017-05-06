@@ -149,4 +149,24 @@ class Api1MainClass{
         return $rp_array;
     }
 
+    function checkForBarcode($barcode, $countryCode = false){
+        $data = $this->fetcher->fetchBarcode($barcode, $countryCode);
+
+        $rp_array = [
+            'name' => $data['name'],
+            'ingredients' => isset($data['ingredients'])?$data['ingredients']:false,
+            'google_link' => $data['google_link'],
+            'shop_links' => []
+        ];
+
+        foreach($data['links'] as $link){
+            $rp_array['shop_links'][] = [
+                'name' => $link['name'],
+                'link' => $link['link']
+            ];
+        }
+
+        return $rp_array;
+    }
+
 }

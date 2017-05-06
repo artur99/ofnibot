@@ -55,8 +55,13 @@ class Api1Controller implements ControllerProviderInterface{
         // Get query parameters
         $data = $app['request']->query->all();
 
+        $apiController = new Api1MainClass($app, $data);
+        if(($err_rp = $this->evvErrCheck($apiController)) !== false) return $err_rp;
 
-        
+        $barcode_data = $apiController->checkForBarcode($barcode);
+        if(($err_rp = $this->evvErrCheck($apiController)) !== false) return $err_rp;
+
+        return $this->rafRespGenerator($apiController, $barcode_data);
     }
 
     function evvErrCheck($apiController){
