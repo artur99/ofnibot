@@ -8,17 +8,14 @@ info:
     url: "https://creativecommons.org/publicdomain/zero/1.0/"
 host: "ofnibot.local"
 basePath: "/api/1"
-tags:
-- name: "movies"
-  description: "Similar movies to search by a certain movie name"
 schemes:
 - "http"
 paths:
   /movies:
-    post:
+    get:
       tags:
       - "Movies"
-      summary: "Search for similar movies by a movie name"
+      summary: "Get similar movies"
       description: "Search for similar movies by a movie name"
       operationId: "getMovie"
       produces:
@@ -35,9 +32,9 @@ paths:
         description: "Whenever the code to be prettified or not\n\nDefault: (false)"
         required: false
         type: "boolean"
-      - name: "sortByScore"
+      - name: "sort_by_score"
         in: "query"
-        description: "If to sort the results by the User Score\n\nDefault: (false)"
+        description: "If to sort the results by the User Score on TMDb\n\nDefault: (false)"
         required: false
         type: "boolean"
       - name: "limit"
@@ -55,12 +52,12 @@ paths:
         404:
           description: "Movie not found"
   /songs:
-    post:
+    get:
       tags:
       - "Songs"
-      summary: "This can only be done by the logged in user."
-      description: "This can only be done by the logged in user."
-      operationId: "createUser"
+      summary: "Get similar songs"
+      description: "Search for similar movies by a movie name"
+      operationId: "getSong"
       produces:
       - "application/xml"
       - "application/json"
@@ -75,9 +72,9 @@ paths:
         description: "Whenever the code to be prettified or not\n\nDefault: (false)"
         required: false
         type: "boolean"
-      - name: "sortByScore"
+      - name: "sort_by_popularity"
         in: "query"
-        description: "If to sort the results by the User Score\n\nDefault: (false)"
+        description: "If to sort the results by their popularity (on last.fm)\n\nDefault: (false)"
         required: false
         type: "boolean"
       - name: "limit"
