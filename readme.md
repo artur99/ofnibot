@@ -12,7 +12,7 @@ Requirements: `git`, `composer`, `node.js`.
 
 Config file: `app/conf.yaml`.
 ```
-$ npm install -g bower grunt-cli
+$ npm install -g bower grunt-cli spectacle-docs
 $ npm update
 $ composer install
 $ bower install
