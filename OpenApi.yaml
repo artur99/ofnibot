@@ -95,8 +95,8 @@ paths:
     get:
       tags:
       - "Products"
-      summary: "Get similar products"
-      description: "Search for similar products by a product barcode"
+      summary: "Find product"
+      description: "Search for a product by a barcode"
       operationId: "getProduct"
       produces:
       - "application/json"
@@ -197,9 +197,16 @@ definitions:
       shop_links:
         type: array
         items:
-          name: "name"
-          link: "link"
-
+          $ref: "#/definitions/ShopLink"
+  ShopLink:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "Shop name"
+      link:
+        type: "string"
+        description: "Link to the shop"
   ApiResponse:
     type: "object"
     properties:
