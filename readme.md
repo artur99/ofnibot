@@ -1,4 +1,4 @@
-# OfniBot (v1.0.0)
+# OfniBot (v1.1.2)
 The prototype of a new index
 
 ## Demo
