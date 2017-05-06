@@ -118,7 +118,7 @@ class FetcherClass{
         $res['artist_link'] = $simi2->toptracks->track[0]->artist->url;
 
         $res['simi'] = [];
-        for($i=0;$i<sizeof($simi_data) && $i<=$limit;$i++){
+        for($i=0;$i<sizeof($simi_data) && $i<$limit;$i++){
             // [0] is the same
             $res['simi'] []= [
                 'name' => $simi_data[$i]->name,
