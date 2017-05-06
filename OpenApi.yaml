@@ -37,6 +37,11 @@ paths:
         description: "If to sort the results by the User Score on TMDb\n\nDefault: (false)"
         required: false
         type: "boolean"
+      - name: "format"
+        in: "query"
+        description: "The output format. Can be json or yaml\n\nDefault: (json)"
+        required: false
+        type: "text"
       - name: "limit"
         in: "query"
         description: "A maximum number of similar movies to be returned\n\nDefault: (false)"
@@ -72,6 +77,11 @@ paths:
         description: "Whenever the code to be prettified or not\n\nDefault: (false)"
         required: false
         type: "boolean"
+      - name: "format"
+        in: "query"
+        description: "The output format. Can be json or yaml\n\nDefault: (json)"
+        required: false
+        type: "text"
       - name: "sort_by_popularity"
         in: "query"
         description: "If to sort the results by their popularity (on last.fm)\n\nDefault: (false)"
@@ -112,6 +122,11 @@ paths:
         description: "Country code"
         required: false
         type: "string"
+      - name: "format"
+        in: "query"
+        description: "The output format. Can be json or yaml\n\nDefault: (json)"
+        required: false
+        type: "text"
       responses:
         200:
           description: "Succesful operation"
