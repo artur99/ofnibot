@@ -17,7 +17,7 @@ class FetcherClass{
         $this->keys['digiteyes_auth'] = $app['conf.api_keys.digiteyes_auth'];
     }
 
-    function fetchMovie($movie_name){
+    function fetchMovie($movie_name, $limit = 5, $orderByScoreDesc = true, $shuffle = 1){
         $url1 = $this->apiHelper('tmdb1', $movie_name);
         $data = $this->wget($url1);
         $data2 = @json_decode($data);
@@ -25,7 +25,7 @@ class FetcherClass{
             return false;
         }
         $movie_data = $data2->results[0];
-
+        $main_movie_id = $movie_data->id;
         $url2 = $this->apiHelper('tmdb3', $movie_data->id);
         $simi = $this->wget($url2);
         $simi2 = @json_decode($data);
@@ -33,13 +33,15 @@ class FetcherClass{
             return false;
         }
         $simi_data = $simi2->results;
-        shuffle($simi_data);
-        usort($simi_data, function($a, $b){
-            if($a->popularity == $b->popularity)
-                return 0;
-            return $a->popularity > $b->popularity ? -1 : 1;
-        });
-
+        if($shuffle)
+            shuffle($simi_data);
+        if($orderByScoreDesc){
+            usort($simi_data, function($a, $b){
+                if($a->popularity == $b->popularity)
+                    return 0;
+                return $a->popularity > $b->popularity ? -1 : 1;
+            });
+        }
 
         if(!strlen($movie_data->overview))
             $movie_data->overview = 'There\'s no overview of the movie in the database yet.';
@@ -48,11 +50,15 @@ class FetcherClass{
         $res['release_year'] = date("Y", strtotime($movie_data->release_date));
         $res['link'] = $this->apiHelper('tmdb2', $movie_data->id);
         $res['image'] = $this->apiHelper('tmdb4', $movie_data->poster_path);
+        $res['score'] = $movie_data->vote_average;
 
         $res['simi'] = [];
 
-        for($i=1;$i<sizeof($simi_data) && $i<=5;$i++){
+        for($i=1,$k=0;$i<sizeof($simi_data) && $k<=$limit;$i++){
             // [0] is the same
+            if($main_movie_id == $simi_data[$i]->id){
+                continue;
+            }
             if(!strlen($simi_data[$i]->overview))
                 $simi_data[$i]->overview = 'There\'s no overview of the movie in the database yet.';
             $res['simi'] []= [
@@ -60,8 +66,10 @@ class FetcherClass{
                 'overview' => $simi_data[$i]->overview,
                 'release_year' => date("Y", strtotime( $simi_data[$i]->release_date)),
                 'link' => $this->apiHelper('tmdb2', $simi_data[$i]->id),
-                'image' => $this->apiHelper('tmdb4', $simi_data[$i]->poster_path)
+                'image' => $this->apiHelper('tmdb4', $simi_data[$i]->poster_path),
+                'score' => $simi_data[$i]->vote_average
             ];
+            $k++;
         }
 
         return $res;

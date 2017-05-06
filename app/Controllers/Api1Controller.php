@@ -7,6 +7,7 @@ use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AiClasses\IdentifierClass;
+use AiClasses\Api1MainClass;
 use Symfony\Component\Yaml\Yaml;
 
 class Api1Controller implements ControllerProviderInterface{
@@ -27,35 +28,26 @@ class Api1Controller implements ControllerProviderInterface{
         // Get query parameters
         $data = $app['request']->query->all();
 
-        $pretty = (isset($data['pretty']) && $data['pretty']) ? true : false;
-        $format = (isset($data['format'])) ? $data['format'] : 'json';
+        $apiController = new Api1MainClass($app, $data);
+        if(($err_rp = $this->evvErrCheck($apiController)) !== false) return $err_rp;
 
-        if(!in_array($format, ['json', 'yaml'])){
-            return $this->genErrorRespose("Invalid format for output", 'json', $pretty);
+        $movie_data = $apiController->checkForMovie();
+        if(($err_rp = $this->evvErrCheck($apiController)) !== false) return $err_rp;
+
+        return $this->rafRespGenerator($apiController, $movie_data);
+    }
+
+    function evvErrCheck($apiController){
+        if($apiController->error){
+            // First check, global
+            $pretty = $apiController->isPretty();
+            $format = $apiController->getFormat();
+
+            $error = $apiController->error;
+            $error_code = $apiController->error_code;
+            return $this->genErrorRespose($error, $format, $pretty, $error_code);
         }
-        if(!isset($data['name'])){
-            return $this->genErrorRespose("No movie name supplied", $format, $pretty);
-        }
-
-        var_dump($data);
-        die();
-        $idf = new IdentifierClass($app, $data['message']);
-
-        if($msss = $idf->firstCheck()){
-            $message = $msss;
-        }else if($msss = $idf->expectedReply()){
-            $message = $msss;
-        }else if($msss = $idf->mainCheck()){
-            $message = $msss;
-        }else{
-            $message = $idf->fallbackMessage();
-        }
-
-        $resp = new JsonResponse();
-	    $resp->setData([
-            'response' => $message
-        ]);
-	    return $resp;
+        return false;
     }
 
     function genErrorRespose($text, $type = 'json', $beautify = 0, $code = 400){
@@ -63,6 +55,13 @@ class Api1Controller implements ControllerProviderInterface{
             'error' => $text
         ];
         return $this->respGenerator($type, $data, $beautify, $code);
+    }
+
+    function rafRespGenerator($apiController, $data){
+        $pretty = $apiController->isPretty();
+        $format = $apiController->getFormat();
+        $code = 200;
+        return $this->respGenerator($format, $data, $pretty, $code);
     }
 
     function respGenerator($type = 'json', $data, $beautify = 0, $code = 200){
@@ -83,9 +82,7 @@ class Api1Controller implements ControllerProviderInterface{
 
         $resp->setCharset('UTF-8');
         $resp->headers->set('Content-Type', $content_type);
-
         $resp->setContent($content);
-
         $resp->setStatusCode($code);
 
         return $resp;
