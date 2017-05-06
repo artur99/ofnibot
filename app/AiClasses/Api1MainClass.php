@@ -36,13 +36,15 @@ class Api1MainClass{
             $this->format = $format;
         }
 
-        $limit = (isset($qp['limit'])) ? intval($qp['limit']) : false;
-        if($limit <= 0){
-            $this->limit = false;
-            $this->error = "Invalid limit for similar entities";
-            return;
-        }else{
-            $this->limit = $limit;
+        if(isset($qp['limit'])){
+            $limit = intval($qp['limit']);
+            if($limit <= 0){
+                $this->limit = false;
+                $this->error = "Invalid limit for similar entities";
+                return;
+            }else{
+                $this->limit = $limit;
+            }
         }
 
         $sbs =  (isset($qp['sort_by_score']) && filter_var($qp['sort_by_score'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
