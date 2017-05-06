@@ -54,6 +54,7 @@ public_html/assets/*
 !public_html/assets/img*
 !public_html/assets/images*
 .trash
+public_html/documentation
 
 ### Configurations ###
 
