@@ -59,8 +59,8 @@ paths:
       description: "Search for similar movies by a movie name"
       operationId: "getSong"
       produces:
-      - "application/xml"
       - "application/json"
+      - "text/yaml"
       parameters:
       - name: "name"
         in: "query"
@@ -87,6 +87,36 @@ paths:
           description: "Succesful operation"
           schema:
             $ref: "#/definitions/Songs"
+        405:
+          description: "Invalid input"
+        404:
+          description: "Song not found"
+  /barcodes/{barcode}:
+    get:
+      tags:
+      - "Products"
+      summary: "Get similar products"
+      description: "Search for similar products by a product barcode"
+      operationId: "getProduct"
+      produces:
+      - "application/json"
+      - "text/yaml"
+      parameters:
+      - name: "barcode"
+        in: "path"
+        description: "The barcode to search for"
+        required: true
+        type: "string"
+      - name: "countryCode"
+        in: "query"
+        description: "Country code"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Succesful operation"
+          schema:
+            $ref: "#/definitions/Barcodes"
         405:
           description: "Invalid input"
         404:
@@ -152,24 +182,36 @@ definitions:
   Song:
     type: "object"
     properties:
-      title:
+      name:
         type: "string"
-        description: "Song title"
-      overview:
-        type: "string"
-        description: "Song overview"
+        description: "Song name"
       link:
         type: "string"
         description: "Song link"
-      release_year:
-        type: "integer"
-        description: "Song release year"
-      image:
+      artist_name:
         type: "string"
-        description: "Song cover image"
-      score:
-        type: "integer"
-        description: "Movie score"
+        description: "Song artist"
+      artist_link:
+        type: "string"
+        description: "Link to the artist"
+  Barcodes:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the product"
+      ingredients:
+        type: "string"
+        description: "The ingredients of the found product"
+      google_link:
+        type: "string"
+        description: "The google link to search for the product"
+      shop_links:
+        type: array
+        items:
+          name: "name"
+          link: "link"
+
   ApiResponse:
     type: "object"
     properties:
