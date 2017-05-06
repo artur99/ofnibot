@@ -7,3 +7,4 @@ $app->mount('/', new Controllers\IndexController());
 // $app->mount('/demo', new Controllers\DemoController());
 $app->mount('/app', new Controllers\AppController());
 $app->mount('/ajax', new Controllers\AjaxController());
+$app->mount('/api/1', new Controllers\Api1Controller());

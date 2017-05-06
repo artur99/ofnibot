@@ -17,6 +17,7 @@ $ npm update
 $ composer install
 $ bower install
 $ grunt
+$ spectacle -t public_html/api/ -d OpenApi.yaml
 ```
 Development watcher fro bower:
 ```
