@@ -47,10 +47,14 @@ class Api1MainClass{
             }
         }
 
-        $sbs =  (isset($qp['sort_by_score']) && filter_var($qp['sort_by_score'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
-        $sbp =  (isset($qp['sort_by_popularity']) && filter_var($qp['sort_by_popularity'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
-        $this->sortByScore = $sbs;
-        $this->sortByPopularity = $sbp;
+        if(isset($qp['sort_by_score'])){
+            $sbs =  (filter_var($qp['sort_by_score'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
+            $this->sortByScore = $sbs;
+        }
+        if(isset($qp['sort_by_popularity'])){
+            $sbp =  (filter_var($qp['sort_by_popularity'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
+            $this->sortByPopularity = $sbp;
+        }
 
     }
 

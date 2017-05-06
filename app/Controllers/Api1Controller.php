@@ -51,6 +51,14 @@ class Api1Controller implements ControllerProviderInterface{
         return $this->rafRespGenerator($apiController, $movie_data);
     }
 
+    public function barcodes(Application $app, $barcode){
+        // Get query parameters
+        $data = $app['request']->query->all();
+
+
+        
+    }
+
     function evvErrCheck($apiController){
         if($apiController->error){
             // First check, global
