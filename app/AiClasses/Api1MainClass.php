@@ -150,6 +150,15 @@ class Api1MainClass{
     }
 
     function checkForBarcode($barcode, $countryCode = false){
+        $rd = $this->request_data;
+        if(isset($rd['country'])){
+            if(!is_string($rd['country'])){
+                $this->error = "The country parameter is invalid";
+                $this->error_code = 401;
+                return false;
+            }
+            $countryCode = $rd['country'];
+        }
         $data = $this->fetcher->fetchBarcode($barcode, $countryCode);
 
         $rp_array = [

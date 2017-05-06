@@ -17,7 +17,6 @@ class Api1Controller implements ControllerProviderInterface{
         $indexController->get('/movies', [$this, 'movies']);
         $indexController->get('/songs', [$this, 'songs']);
         $indexController->get('/barcodes/{barcode}', [$this, 'barcodes']);
-        $indexController->get('/barcodes/{countryCode}/{barcode}', [$this, 'barcodes_country']);
         return $indexController;
     }
     public function index(Application $app){

@@ -140,7 +140,7 @@ class FetcherClass{
             $country = isset($country0->country_code) ? $country0->country_code : false;
         }else{
             if(is_string($autoCountry)){
-                $country = strtolower($autoCountry);
+                $country = strtoupper($autoCountry);
             }else{
                 $country = false;
             }
