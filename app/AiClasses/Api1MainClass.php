@@ -14,6 +14,7 @@ class Api1MainClass{
     private $format = 'json';
     private $limit = 40;
     private $sortByScore = false;
+    private $sortByPopularity = false;
 
     function __construct($app, $request_data){
         $this->request_data = $request_data;
@@ -44,8 +45,10 @@ class Api1MainClass{
             $this->limit = $limit;
         }
 
-        $sbs =  (isset($qp['sortByScore']) && filter_var($qp['sortByScore'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
+        $sbs =  (isset($qp['sort_by_score']) && filter_var($qp['sort_by_score'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
+        $sbp =  (isset($qp['sort_by_popularity']) && filter_var($qp['sort_by_popularity'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
         $this->sortByScore = $sbs;
+        $this->sortByPopularity = $sbp;
 
     }
 
@@ -102,7 +105,47 @@ class Api1MainClass{
         return $rp_array;
     }
 
-    function movieDataParser($moviedata){
+    function checkForSong(){
+        $rd = $this->request_data;
+        if(!isset($rd['name']) || !is_string($rd['name'])){
+            $this->error = "No song name supplied";
+            $this->error_code = 401;
+            return false;
+        }
 
+        $data = $this->fetcher->fetchSong($rd['name'], $this->limit, $this->sortByPopularity, 1);
+        var_dump($data);die();
+        if(!$data){
+            $this->error = "Song not found";
+            $this->error_code = 404;
+            return false;
+        }
+        if($this->sortByScore){
+            uasort($data['simi'], function($a, $b) {
+                return($a['score'] < $b['score']);
+            });
+        }
+
+        $rp_array = [
+            'movie' => [
+                'name' => $data['name'],
+                'link' =>  $data['link'],
+                'artist' => $data['artist'],
+                'artist_link' =>  $data['artist_link']
+            ],
+            'similar_songs_count' => count($data['simi']),
+            'similar_songs' => []
+        ];
+        foreach($data['simi'] as $s_song){
+            $rp_array['similar_songs'][] = [
+                'name' => $s_song['name'],
+                'link' =>  $s_song['link'],
+                'artist' => $s_song['artist'],
+                'artist_link' =>  $s_song['artist_link']
+            ];
+        }
+
+        return $rp_array;
     }
+
 }

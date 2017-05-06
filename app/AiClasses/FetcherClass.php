@@ -17,7 +17,7 @@ class FetcherClass{
         $this->keys['digiteyes_auth'] = $app['conf.api_keys.digiteyes_auth'];
     }
 
-    function fetchMovie($movie_name, $limit = 5, $orderByScoreDesc = true, $shuffle = 1){
+    function fetchMovie($movie_name, $limit = 5, $orderByScoreDesc = false, $shuffle = 0){
         $url1 = $this->apiHelper('tmdb1', $movie_name);
         $data = $this->wget($url1);
         $data2 = @json_decode($data);
@@ -33,13 +33,20 @@ class FetcherClass{
             return false;
         }
         $simi_data = $simi2->results;
-        if($shuffle)
+        if($shuffle){
             shuffle($simi_data);
-        if($orderByScoreDesc){
+        }else{
             usort($simi_data, function($a, $b){
                 if($a->popularity == $b->popularity)
                     return 0;
                 return $a->popularity > $b->popularity ? -1 : 1;
+            });
+        }
+        if($orderByScoreDesc){
+            usort($simi_data, function($a, $b){
+                if($a->user_score == $b->user_score)
+                    return 0;
+                return $a->user_score > $b->user_score ? -1 : 1;
             });
         }
 
@@ -75,7 +82,7 @@ class FetcherClass{
         return $res;
     }
 
-    function fetchSong($song_name){
+    function fetchSong($song_name, $limit = 8, $orderByPopularityDesc = true, $shuffle = 1){
         $url1 = $this->apiHelper('lastfm1', $song_name);
         $data = $this->wget($url1);
         $data2 = @json_decode($data);
@@ -94,16 +101,24 @@ class FetcherClass{
         if(!isset($simi2->toptracks->track)){
             return false;
         }
-        $simi_data = array_slice($simi2->toptracks->track, 0, 12);
-        shuffle($simi_data);
-
+        $simi_data = array_slice($simi2->toptracks->track, 1, 100);
+        if($orderByPopularityDesc){
+            usort($simi_data, function($a, $b){
+                if($a->listeners == $b->listeners)
+                    return 0;
+                return $a->listeners > $b->listeners ? -1 : 1;
+            });
+        }elseif($shuffle){
+            shuffle($simi_data);
+        }
 
         $res['name'] = $song_data->name;
-        $res['artist'] = $song_data->artist;
         $res['link'] = $song_data->url;
+        $res['artist'] = $song_data->artist;
+        $res['artist_link'] = $simi2->toptracks->track[0]->artist->url;
 
         $res['simi'] = [];
-        for($i=1;$i<sizeof($simi_data) && $i<=8;$i++){
+        for($i=0;$i<sizeof($simi_data) && $i<=$limit;$i++){
             // [0] is the same
             $res['simi'] []= [
                 'name' => $simi_data[$i]->name,

@@ -15,7 +15,7 @@ class Api1Controller implements ControllerProviderInterface{
         $indexController = $app['controllers_factory'];
         $indexController->match('/', [$this, 'index']);
         $indexController->get('/movies', [$this, 'movies']);
-        $indexController->get('/songs', [$this, 'movies']);
+        $indexController->get('/songs', [$this, 'songs']);
         $indexController->get('/barcodes/{barcode}', [$this, 'barcodes']);
         $indexController->get('/barcodes/{countryCode}/{barcode}', [$this, 'barcodes_country']);
         return $indexController;
@@ -45,7 +45,7 @@ class Api1Controller implements ControllerProviderInterface{
         $apiController = new Api1MainClass($app, $data);
         if(($err_rp = $this->evvErrCheck($apiController)) !== false) return $err_rp;
 
-        $movie_data = $apiController->checkForMovie();
+        $movie_data = $apiController->checkForSong();
         if(($err_rp = $this->evvErrCheck($apiController)) !== false) return $err_rp;
 
         return $this->rafRespGenerator($apiController, $movie_data);
