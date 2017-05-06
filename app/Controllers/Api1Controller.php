@@ -24,7 +24,21 @@ class Api1Controller implements ControllerProviderInterface{
         // return $app['twig']->render('app.twig');
         return 1;
     }
+
     public function movies(Application $app){
+        // Get query parameters
+        $data = $app['request']->query->all();
+
+        $apiController = new Api1MainClass($app, $data);
+        if(($err_rp = $this->evvErrCheck($apiController)) !== false) return $err_rp;
+
+        $movie_data = $apiController->checkForMovie();
+        if(($err_rp = $this->evvErrCheck($apiController)) !== false) return $err_rp;
+
+        return $this->rafRespGenerator($apiController, $movie_data);
+    }
+
+    public function songs(Application $app){
         // Get query parameters
         $data = $app['request']->query->all();
 

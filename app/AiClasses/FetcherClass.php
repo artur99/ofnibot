@@ -54,7 +54,7 @@ class FetcherClass{
 
         $res['simi'] = [];
 
-        for($i=1,$k=0;$i<sizeof($simi_data) && $k<=$limit;$i++){
+        for($i=1,$k=1;$i<sizeof($simi_data) && $k<=$limit;$i++){
             // [0] is the same
             if($main_movie_id == $simi_data[$i]->id){
                 continue;
