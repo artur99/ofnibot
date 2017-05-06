@@ -114,16 +114,11 @@ class Api1MainClass{
         }
 
         $data = $this->fetcher->fetchSong($rd['name'], $this->limit, $this->sortByPopularity, 1);
-        var_dump($data);die();
+
         if(!$data){
             $this->error = "Song not found";
             $this->error_code = 404;
             return false;
-        }
-        if($this->sortByScore){
-            uasort($data['simi'], function($a, $b) {
-                return($a['score'] < $b['score']);
-            });
         }
 
         $rp_array = [

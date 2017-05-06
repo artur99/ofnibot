@@ -132,12 +132,19 @@ class FetcherClass{
 
     }
 
-    function fetchBarcode($barcode){
-        $ip = ($_SERVER["REMOTE_ADDR"] == '127.0.0.1' ? '31.5.80.114' : $_SERVER["REMOTE_ADDR"]);
-        $urlc = $this->apiHelper('country', $ip);
-        $country0 = @json_decode(@file_get_contents($urlc));
-        $country = isset($country0->country_code) ? $country0->country_code : false;
-
+    function fetchBarcode($barcode, $autoCountry = true){
+        if($autoCountry === true){
+            $ip = ($_SERVER["REMOTE_ADDR"] == '127.0.0.1' ? '31.5.80.114' : $_SERVER["REMOTE_ADDR"]);
+            $urlc = $this->apiHelper('country', $ip);
+            $country0 = @json_decode(@file_get_contents($urlc));
+            $country = isset($country0->country_code) ? $country0->country_code : false;
+        }else{
+            if(is_string($autoCountry)){
+                $country = $autoCountry;
+            }else{
+                $country = false;
+            }
+        }
         $ingredients = $google_link = false;
         $sitelinks = [];
 
