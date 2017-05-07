@@ -1,5 +1,6 @@
 # OfniBot (v1.1.2)
-The prototype of a new index
+The prototype of a new index. An intelligent bot made in PHP by @artur99 and @iulyus01.
+Updated by developing a public REST API (using OpenApi standards) for the bot's services.
 
 ## Demo
 [ofnibot.artur99.net]
