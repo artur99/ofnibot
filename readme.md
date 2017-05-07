@@ -1,6 +1,6 @@
 # OfniBot (v1.1.2)
 The prototype of a new index. An intelligent bot made in PHP by @artur99 and @iulyus01.
-Updated by developing a public REST API (using OpenApi standards) for the bot's services.
+Then updated by developing a public REST API (using OpenApi standards) for the bot's services, as requested in the final phase of the [FiiCode] 2017 contest.
 
 ## Demo
 [ofnibot.artur99.net]
@@ -66,3 +66,4 @@ The messages are filtered each time, so there couldn't be any XSS in the page, a
    [TMDb]: <https://www.themoviedb.org>
    [Last.fm]: <https://www.last.fm>
    [FreeGeoIP]: <http://freegeoip.net>
+   [FiiCode]: <http://fiicode.com>
