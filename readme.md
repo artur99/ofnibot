@@ -1,5 +1,5 @@
 # OfniBot (v1.1.2)
-The prototype of a new index. An intelligent bot made in PHP by @artur99 and @iulyus01.
+The prototype of a new index. An intelligent bot made in PHP by [artur99] and [iulyus01].
 Then updated by developing a public REST API (using OpenApi standards) for the bot's services, as requested in the final phase of the [FiiCode] 2017 contest.
 
 ## Demo
@@ -7,6 +7,9 @@ Then updated by developing a public REST API (using OpenApi standards) for the b
 
 ## About
 Ofnibot offers you an interesting, funny and easy way of finding and comparing different entities on the internet, using some of the biggest databases of movies, songs, product barcodes and a lot more.
+
+### Some GIFs:
+<a href="http://i.imgur.com/6p3lZUW.gif" target="_blank"><img src="http://i.imgur.com/6p3lZUW.gif" height="320"></a>
 
 ## Installation
 Requirements: `git`, `composer`, `node.js`.
@@ -67,3 +70,5 @@ The messages are filtered each time, so there couldn't be any XSS in the page, a
    [Last.fm]: <https://www.last.fm>
    [FreeGeoIP]: <http://freegeoip.net>
    [FiiCode]: <http://fiicode.com>
+   [artur99]: <http://github.com/artur99>
+   [iulyus01]: <http://github.com/iulyus01>
